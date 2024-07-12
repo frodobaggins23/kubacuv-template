@@ -28,3 +28,18 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Custom styles
+Both sass and (s)css modules are available. Feel free to use whichever you prefer.
+
+## Testing
+
+Vitest is preconfigured. 
+
+## Contributing
+
+Husky git hooks are available. Check pre-commit and pre-push rules.
+
+## Deployment
+
+Github worflow is preconfigured for deployment to Vercel. Should work out of the box, only precondition is setting your Vercel account token into gihub secrets.
