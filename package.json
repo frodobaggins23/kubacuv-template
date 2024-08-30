@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -10,7 +13,8 @@
     "tsc": "npx tsc --project ./tsconfig.app.json",
     "preview": "vite preview",
     "prepare": "husky",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "gc": "node ./scripts/generate-component.js"
   },
   "dependencies": {
     "react": "^18.3.1",
