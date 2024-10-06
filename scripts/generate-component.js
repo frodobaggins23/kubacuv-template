@@ -4,9 +4,12 @@ import path from "path"
 import process from "process"
 import { fileURLToPath } from "url"
 
+const PARAM_COMPONENT = "-c"
+const PARAM_PAGE = "-p"
+
 const TYPES = {
-  COMPONENT: "c",
-  PAGE: "p",
+  COMPONENT: PARAM_COMPONENT,
+  PAGE: PARAM_PAGE,
 }
 
 const TYPES_NAMES = {
@@ -25,11 +28,19 @@ const INDEX_FILENAME = "index.ts"
 const COMPONENT_TEMPLATE_FILENAME = "Component.tsx"
 
 const KEBAB_CASE_SEPARATOR = "-"
+const SNAKE_CASE_SEPARATOR = "_"
 
 const readlineInstance = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 })
+
+function printUsage() {
+  console.log("Usage: generate-component [type] [name]")
+  console.log("    type: -c (component) or -p (page)")
+  console.log("    name: the name of the component or page")
+  console.log("or without arguments to be prompted")
+}
 
 function toUpperCaseFirstLetter(name) {
   return `${name.charAt(0).toUpperCase() + name.slice(1)}`
@@ -65,8 +76,8 @@ function renameFile(sourceFile, targetDir, name) {
   fs.renameSync(sourceFile, targetFile)
 }
 
-function kebabToCamelCase(value) {
-  return value.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+function otherCaseToCamelCase(value, separator) {
+  return value.replace(new RegExp(`${separator}([a-z])`, "g"), (g) => g[1].toUpperCase())
 }
 
 function createTemplate(type, name) {
@@ -76,7 +87,7 @@ function createTemplate(type, name) {
 
   // Check if the target directory already exists
   if (fs.existsSync(targetDir)) {
-    console.error(`Error: ${type} '${name}' already exists.`)
+    console.error(`Error: ${TYPES_NAMES[type]} '${name}' already exists.`)
     return
   }
 
@@ -94,7 +105,12 @@ function createTemplate(type, name) {
   let normalizedName = name
   if (name.includes(KEBAB_CASE_SEPARATOR)) {
     console.info("Kebab case detected. Will be used for folder name only.")
-    normalizedName = kebabToCamelCase(name)
+    normalizedName = otherCaseToCamelCase(name, KEBAB_CASE_SEPARATOR)
+  }
+  // normalize snake case
+  if (name.includes(SNAKE_CASE_SEPARATOR)) {
+    console.info("Snake case detected. Will be used for folder name only.")
+    normalizedName = otherCaseToCamelCase(name, SNAKE_CASE_SEPARATOR)
   }
 
   // Update the template files
@@ -133,6 +149,19 @@ function question2() {
 async function main() {
   let componentType = process.argv[2]
   let name = process.argv[3]
+
+  // validate arguments
+  if (componentType && !Object.values(TYPES).includes(componentType)) {
+    console.error(`Error: Invalid type selected. (${componentType})`)
+    printUsage()
+    process.exit(1)
+  }
+
+  if (name && !name.trim()) {
+    console.error("Error: Empty name entered.")
+    printUsage()
+    process.exit(1)
+  }
 
   try {
     if (!componentType) {
