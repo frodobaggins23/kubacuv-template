@@ -1,45 +1,89 @@
-# React + TypeScript + Vite
+# Vite + React + TypeScript Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a template repository for creating a Vite project with React and TypeScript. It includes a set of tools and configurations to help you get started quickly.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js 22.x
+- npm (comes with Node.js)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+2. Install dependencies:
+
+  ```sh
+  npm install
+  ```
+
+3. Create a `.env.local` file in the root directory and add your environment variables:
+
+  ```sh
+  echo 'VITE_MESSAGE="Your secret message"' > .env.local
+  ```
+
+### Development
+
+To start the development server:
+
+```sh
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This will start the Vite development server and open your project in the default web browser.
 
-## Custom styles
-Both sass and (s)css modules are available. Feel free to use whichever you prefer.
+### Building for Production
 
-## Testing
+To build the project for production:
 
-Vitest is preconfigured. 
+```sh
+npm run build
+```
 
-## Contributing
+The production-ready files will be generated in the `dist` directory.
 
-Husky git hooks are available. Check pre-commit and pre-push rules.
+### Previewing the Production Build
 
-## Deployment
+To preview the production build:
 
-Github worflow is preconfigured for deployment to Vercel. Should work out of the box, only precondition is setting your Vercel account token into gihub secrets.
+```sh
+npm run preview
+```
+
+### Linting and Formatting
+
+To lint and format the code:
+
+```sh
+npm run lint
+```
+
+### Running Tests
+
+To run the tests:
+
+```sh
+npm run test
+```
+
+### Generating Components
+
+To generate a new component or page, use the `gc` script:
+
+```sh
+npm run gc -- -c ComponentName
+npm run gc -- -p PageName
+# or run without params for prompts in terminal
+npm run gc
+```
+
+### Deployment
+
+This project is configured to deploy to Vercel. The deployment workflow is defined in `.github/workflows/vercel.yaml`.
+
+## License
+
+This project is licensed under the MIT License.
