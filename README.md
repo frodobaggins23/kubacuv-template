@@ -83,7 +83,3 @@ npm run gc
 ### Deployment
 
 This project is configured to deploy to Vercel. The deployment workflow is defined in `.github/workflows/vercel.yaml`.
-
-## License
-
-This project is licensed under the MIT License.
