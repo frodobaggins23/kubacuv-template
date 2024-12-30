@@ -126,10 +126,11 @@ function createTemplate(type, name) {
 function question1() {
   return new Promise((resolve, reject) => {
     readlineInstance.question("Select the type (component [c] or page [p]): ", (type) => {
-      if (!Object.values(TYPES).includes(type)) {
+      const userInputAsArgv = `-${type}`
+      if (!Object.values(TYPES).includes(userInputAsArgv)) {
         reject("Error: Invalid type selected.")
       } else {
-        resolve(type)
+        resolve(userInputAsArgv)
       }
     })
   })
