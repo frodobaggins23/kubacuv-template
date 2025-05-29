@@ -63,6 +63,8 @@ To run the tests:
 npm run test
 ```
 
+This command executes all unit and component tests using Vitest. The template includes example component tests for `App.tsx` and `Boilerplate.tsx` (located in their respective `__tests__` subdirectories), demonstrating how to use React Testing Library for testing UI components, interactions, and props. You can run specific test files by passing the file path as an argument to the test script (e.g., `npm test -- src/pages/App/__tests__/App.test.tsx`).
+
 ### Generating Components
 
 To generate a new component or page, use the `gc` script:
